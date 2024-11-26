@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 require('dotenv').config();
 const cors = require('cors');
@@ -21,10 +22,12 @@ app.use(express.json());
 
 
 // Rutas
-// TODO auth // crear, login, renew
-app.use('/api/auth', require('./routes/auth'));
-// TODO CRUD: eventos
-app.use('/api/events', require('./routes/events'));
+app.use('/api/auth', require('./routes/auth')); //authentication
+app.use('/api/events', require('./routes/events')); //eventos
+
+app.use('*', (req, res ) => {
+    res.sendFile(path.join(__dirname, 'public/index.html'));
+});
 
 // Escuchar peticiones
 app.listen( process.env.PORT, () => {

@@ -18,10 +18,9 @@ const crearEvento = async( req, res = response ) => {
         const eventoGuardado = await evento.save();
 
         res.status(201).json({
-            ok: false,
+            ok: true,
             evento: eventoGuardado,
         });
-
     } catch (error) {
         console.log(error);
         res.status(500).json({
